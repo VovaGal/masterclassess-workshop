@@ -1,0 +1,52 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Frontend dependencies and generated output
+node_modules/
+/frontend/dist/
+/frontend/.vite/
+*.tsbuildinfo
+coverage/
+
+# Local workshop database, sessions, and SQLite sidecar files
+/data/
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.db-*
+
+# Environment variables and secrets (keep sanitised templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Runtime logs and machine-specific preview helper
+*.log
+/scripts/preview.mjs
+
+# Keep source code, scenarios/*.json, documentation,
+# package.json, package-lock.json, requirements*.txt,
+# and setup/start scripts tracked.

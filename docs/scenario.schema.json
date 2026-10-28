@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "Choice": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "feedback": {
+          "default": "",
+          "title": "Feedback",
+          "type": "string"
+        },
+        "correct": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Correct"
+        },
+        "next": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next"
+        },
+        "effects": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Effects",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "Choice",
+      "type": "object"
+    },
+    "Notes": {
+      "additionalProperties": false,
+      "properties": {
+        "talk": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Talk",
+          "type": "array"
+        },
+        "activity": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Activity",
+          "type": "array"
+        },
+        "important": {
+          "default": "",
+          "title": "Important",
+          "type": "string"
+        },
+        "short": {
+          "default": "",
+          "title": "Short",
+          "type": "string"
+        }
+      },
+      "title": "Notes",
+      "type": "object"
+    },
+    "Slide": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "layout": {
+          "default": "cards",
+          "enum": [
+            "title",
+            "cards",
+            "choice",
+            "code",
+            "board",
+            "flow",
+            "break",
+            "summary"
+          ],
+          "title": "Layout",
+          "type": "string"
+        },
+        "minutes": {
+          "default": 3,
+          "maximum": 120,
+          "minimum": 0,
+          "title": "Minutes",
+          "type": "integer"
+        },
+        "body": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Body",
+          "type": "array"
+        },
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Code"
+        },
+        "reveal": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reveal",
+          "type": "array"
+        },
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/Choice"
+          },
+          "maxItems": 8,
+          "title": "Choices",
+          "type": "array"
+        },
+        "selection_limit": {
+          "default": 1,
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Selection Limit",
+          "type": "integer"
+        },
+        "columns": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Columns",
+          "type": "object"
+        },
+        "next": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next"
+        },
+        "notes": {
+          "$ref": "#/$defs/Notes"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "section"
+      ],
+      "title": "Slide",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "simulation": {
+      "anyOf": [
+        {
+          "const": "festival-v1",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Simulation"
+    },
+    "id": {
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "subtitle": {
+      "default": "",
+      "title": "Subtitle",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "start": {
+      "title": "Start",
+      "type": "string"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "slides": {
+      "items": {
+        "$ref": "#/$defs/Slide"
+      },
+      "maxItems": 200,
+      "minItems": 1,
+      "title": "Slides",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "start",
+    "slides"
+  ],
+  "title": "Scenario",
+  "type": "object"
+}
